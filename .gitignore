@@ -1,0 +1,5 @@
+sim
+verify/smoke
+transcript
+*.pb
+*.log
