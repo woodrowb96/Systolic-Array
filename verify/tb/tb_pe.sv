@@ -2,8 +2,6 @@ module tb_pe
   import systolic_verify_pkg::*;
   import systolic_pkg::*;
 ();
-  localparam CLK_PERIOD = 10;
-
   /******* TB CLK *******/
   bit clk;
   initial begin
