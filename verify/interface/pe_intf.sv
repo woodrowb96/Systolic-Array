@@ -20,7 +20,7 @@ interface pe_intf
   bit valid; //sim only
 
   clocking cb_drv @(posedge clk);
-    default output negedge;
+    default output #1;
     output mode, weight_in, activation_in, psum_in, reset_n, valid;
   endclocking
 
