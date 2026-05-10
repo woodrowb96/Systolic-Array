@@ -12,3 +12,4 @@ verify/monitor/pe_monitor_pkg.sv
 verify/scoreboard/pe_scoreboard_pkg.sv
 verify/agent/pe_agent_pkg.sv
 verify/environment/pe_env_pkg.sv
+verify/test/pe_test_pkg.sv
