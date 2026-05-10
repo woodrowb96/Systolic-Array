@@ -5,3 +5,5 @@ rtl/pe.sv
 # Verification
 verify/common/systolic_verify_pkg.sv
 verify/interface/pe_intf.sv
+verify/seq_item/pe_seq_item_pkg.sv
+verify/sequence/pe_seq_pkg.sv
