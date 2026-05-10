@@ -43,10 +43,10 @@ package pe_test_pkg;
     endtask
 
     virtual task apply_reset_n();
-      @(vif.cb_mon)
-      vif.cb_mon.reset_n <= 0;
-      @(vif.cb_mon)
-      vif.cb_mon.reset_n <= 1;
+      @(vif.cb_drv)
+      vif.cb_drv.reset_n <= 0;
+      @(vif.cb_drv)
+      vif.cb_drv.reset_n <= 1;
     endtask
   endclass
 

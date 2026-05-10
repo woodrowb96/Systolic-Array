@@ -25,7 +25,7 @@ package pe_seq_item_pkg;
       super.new(name);
     endfunction
 
-    virtual function string convert2string();
+    virtual function string convert2str();
       return $sformatf("valid:%b, mode:%s weight_in:%0d activation_in:%0d psum_in:%0d, activation_out:%0d, psum_out:%0d",
              valid, mode, weight_in, activation_in, psum_in, activation_out, psum_out);
     endfunction

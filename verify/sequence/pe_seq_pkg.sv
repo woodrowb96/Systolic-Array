@@ -32,7 +32,7 @@ package pe_seq_pkg;
         //tell driver and sequencer the item is ready
         finish_item(item);
       end
-      `uvm_info("SEQ", $sformatf("Done generating %0d items", num), UVM_HIGH);
+      `uvm_info("SEQ", $sformatf("Done generating %0d items", seq_length), UVM_HIGH);
     endtask
   endclass
 

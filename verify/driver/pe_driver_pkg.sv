@@ -32,14 +32,14 @@ package pe_driver_pkg;
       end
     endtask
 
-    virtual task drive_item(Item m_item);
-      @(vif.cb_drive);
+    virtual task drive_item(pe_seq_item item);
+      @(vif.cb_drv);
       // vif.cb_drv.valid <= 1; //sim only   NEED TO LOOK INTO THIS
-      vif.cb_drive.mode          <= item.mode;
-      vif.cb_drive.weight_in     <= item.weight_in;
-      vif.cb_drive.activation_in <= item.activation_in;
-      vif.cb_drive.activation_in <= item.activation_in;
-      vif.cb_drive.psum_in       <= item.psum_in;
+      vif.cb_drv.mode          <= item.mode;
+      vif.cb_drv.weight_in     <= item.weight_in;
+      vif.cb_drv.activation_in <= item.activation_in;
+      vif.cb_drv.activation_in <= item.activation_in;
+      vif.cb_drv.psum_in       <= item.psum_in;
     endtask
   endclass
 

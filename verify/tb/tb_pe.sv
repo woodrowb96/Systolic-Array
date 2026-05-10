@@ -1,6 +1,9 @@
 module tb_pe
   import systolic_verify_pkg::*;
   import systolic_pkg::*;
+  import uvm_pkg::*;
+  import pe_test_pkg::*;
+  `include "uvm_macros.svh"
 ();
   /******* TB CLK *******/
   bit clk;
@@ -26,26 +29,8 @@ module tb_pe
 
   /******** TESTING **********/
   initial begin
-    repeat(5) begin
-      @(intf.cb_drv)
-      intf.cb_drv.reset_n <= 0;
-      intf.cb_drv.mode <=  LOAD;
-      intf.cb_drv.weight_in <=  'd5;
-      intf.cb_drv.activation_in <=  'd6;
-      intf.cb_drv.psum_in <=  'd10;
-    end
-
-    repeat(5) begin
-      @(intf.cb_drv)
-      intf.cb_drv.reset_n <= 1;
-    end
-
-    repeat(5) begin
-      @(intf.cb_drv)
-      intf.cb_drv.mode <=  CALC;
-      intf.cb_drv.weight_in <=  'd7;
-    end
-
+    uvm_config_db#(virtual pe_intf)::set(null, "uvm_test_top", "pe_vif", intf);
+    run_test("pe_test_1");
     $stop(1);
   end
 endmodule
