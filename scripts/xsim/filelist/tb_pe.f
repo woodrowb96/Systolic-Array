@@ -10,3 +10,4 @@ verify/sequence/pe_seq_pkg.sv
 verify/driver/pe_driver_pkg.sv
 verify/monitor/pe_monitor_pkg.sv
 verify/scoreboard/pe_scoreboard_pkg.sv
+verify/agent/pe_agent_pkg.sv
