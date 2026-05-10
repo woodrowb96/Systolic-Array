@@ -1,4 +1,4 @@
-package tb_tests_pkg;
+package pe_test_pkg;
   import uvm_pkg::*;
   import pe_env_pkg::*;
   import pe_seq_pkg::*;
