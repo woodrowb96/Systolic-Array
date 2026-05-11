@@ -34,18 +34,17 @@ package pe_test_pkg;
     virtual task run_phase(uvm_phase phase);
       phase.raise_objection(this);
 
-      apply_reset_n();            //reset the interface
-      seq.start(env.agn.seq);     //start generating sequences
-      #(CLK_PERIOD * 1.5)         //wait a bit, so the last trans can get processed (not sure here?)
+      apply_reset_n();                        //reset the interface
+      seq.start(env.agn.seq);                 //start generating sequences
+      repeat(PE_LATENCY + 1) @(vif.cb_drv);   //wait for testing to finish up
 
-      //testing is done so drop our objection
       phase.drop_objection(this);
     endtask
 
     virtual task apply_reset_n();
-      @(vif.cb_drv)
+      @(vif.cb_drv);
       vif.cb_drv.reset_n <= 0;
-      @(vif.cb_drv)
+      repeat(5) @(vif.cb_drv);
       vif.cb_drv.reset_n <= 1;
     endtask
   endclass

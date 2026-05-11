@@ -29,7 +29,7 @@ package pe_monitor_pkg;
 
       forever begin
         @(vif.cb_mon);
-        if(vif.reset_n) begin
+        if(vif.reset_n && vif.cb_mon.valid) begin //only monitor valid transactions
           pe_seq_item item = pe_seq_item::type_id::create("item");
 
           //sample DUT inputs

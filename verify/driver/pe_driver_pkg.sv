@@ -22,23 +22,26 @@ package pe_driver_pkg;
     virtual task run_phase(uvm_phase phase);
       super.run_phase(phase);
 
-      //loop, get items from the sequencer, drive them onto the interface
+      wait(vif.reset_n);
+
       forever begin
         pe_seq_item item;
-        `uvm_info("DRV", $sformatf("WAIT for item from sequence"), UVM_HIGH)
-        seq_item_port.get_next_item(item);
-        drive_item(item);
-        seq_item_port.item_done();
+        @(vif.cb_drv);
+        //If we have a valid transaction available then drive it and set valid == 1
+        //If we dont, set valid == 0 then loop around to the next clk cycle and try again
+        seq_item_port.try_next_item(item);
+        if(item != null) begin
+          vif.cb_drv.valid <= 1; //sim only, so monitor knows the interface has a valid transaction on it
+          vif.cb_drv.mode          <= item.mode;
+          vif.cb_drv.weight_in     <= item.weight_in;
+          vif.cb_drv.activation_in <= item.activation_in;
+          vif.cb_drv.psum_in       <= item.psum_in;
+          seq_item_port.item_done();
+        end
+        else begin
+          vif.cb_drv.valid <= 1'b0;
+        end
       end
-    endtask
-
-    virtual task drive_item(pe_seq_item item);
-      @(vif.cb_drv);
-      // vif.cb_drv.valid <= 1; //sim only   NEED TO LOOK INTO THIS
-      vif.cb_drv.mode          <= item.mode;
-      vif.cb_drv.weight_in     <= item.weight_in;
-      vif.cb_drv.activation_in <= item.activation_in;
-      vif.cb_drv.psum_in       <= item.psum_in;
     endtask
   endclass
 
