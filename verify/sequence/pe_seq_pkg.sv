@@ -7,11 +7,11 @@ package pe_seq_pkg;
   class pe_seq extends uvm_sequence;
     `uvm_object_utils(pe_seq)
 
+    int seq_length;
+
     function new(string name = "pe_seq");
       super.new(name);
     endfunction
-
-    int seq_length;
 
     //TODO:
     //No constraints yet, just get randomization working
@@ -26,8 +26,13 @@ package pe_seq_pkg;
         start_item(item);
 
         //randomize the item
-        item.randomize();
-        `uvm_info("SEQ", $sformatf("Generate new item: %s", item.convert2str()), UVM_HIGH);
+
+        if(item.randomize()) begin
+          `uvm_info("SEQ", $sformatf("Generate new item: %s", item.convert2str()), UVM_HIGH);
+        end
+        else begin
+          `uvm_fatal("SEQ", "Failed item.randomize().")
+        end
 
         //tell driver and sequencer the item is ready
         finish_item(item);

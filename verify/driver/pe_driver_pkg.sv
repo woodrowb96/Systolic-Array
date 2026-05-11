@@ -38,7 +38,6 @@ package pe_driver_pkg;
       vif.cb_drv.mode          <= item.mode;
       vif.cb_drv.weight_in     <= item.weight_in;
       vif.cb_drv.activation_in <= item.activation_in;
-      vif.cb_drv.activation_in <= item.activation_in;
       vif.cb_drv.psum_in       <= item.psum_in;
     endtask
   endclass
