@@ -6,18 +6,18 @@ interface pe_intf
 )(
   input logic clk
 );
-  logic reset_n;
+  logic reset_n = 1'b0;
   //control
-  mode_t mode;
+  mode_t mode = LOAD;
   //input
-  logic signed [DATA_WIDTH-1:0] weight_in;
-  logic signed [DATA_WIDTH-1:0] activation_in;
-  logic signed [ACC_WIDTH-1:0]  psum_in;
+  logic signed [DATA_WIDTH-1:0] weight_in     = '0;
+  logic signed [DATA_WIDTH-1:0] activation_in = '0;
+  logic signed [ACC_WIDTH-1:0]  psum_in       = '0;
   //output
   logic signed [DATA_WIDTH-1:0] activation_out;
   logic signed [ACC_WIDTH-1:0]  psum_out;
 
-  bit valid; //sim only
+  bit valid = 1'b0; //sim only, so driver can tell monitor which packets are valid
 
   clocking cb_drv @(posedge clk);
     default output #1;
